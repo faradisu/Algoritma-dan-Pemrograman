@@ -1,0 +1,1 @@
+matrixA[i,k]*matrixB[k,j]
