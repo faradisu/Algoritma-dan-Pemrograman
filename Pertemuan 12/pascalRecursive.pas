@@ -8,6 +8,10 @@ begin
 end;
 
 begin
-    for i := 0 to n do
-        pascalTriangle(i);
+    for i := 0 to n do begin
+        
+        // for j := 0 to i do begin
+        //     pascalTriangle(i,k);
+        // end;
+    end;
 end.
