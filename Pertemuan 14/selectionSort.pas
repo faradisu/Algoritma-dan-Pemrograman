@@ -13,8 +13,7 @@ begin
         Temp:=data[i];
         data[i]:=data[max]; 
         data[max]:=temp;
-        for j := 1 to n do
-            write(data[j],' ');
+        showData(data, n);
         writeln;
     end; 
 end;
