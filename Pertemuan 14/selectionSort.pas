@@ -2,6 +2,15 @@ program selectionMenurun;
 uses crt;
 
 type larik = array [1..100] of integer; 
+
+procedure showData(data: larik; n: integer);
+var
+    i: integer;
+begin
+    for i := 1 to n do
+        write(data[i], ' ');
+end;
+
 procedure SelectionSort(var data:larik; n:integer); 
 var  
     i, j, max, temp:integer; 
@@ -16,14 +25,6 @@ begin
         showData(data, n);
         writeln;
     end; 
-end;
-
-procedure showData(data: larik; n: integer);
-var
-    i: integer;
-begin
-    for i := 1 to n do
-        write(data[i], ' ');
 end;
 
 var
