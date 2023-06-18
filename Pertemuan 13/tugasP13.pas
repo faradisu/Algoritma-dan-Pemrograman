@@ -91,7 +91,7 @@ var
 begin
     findScore:=-1;
     for i := 0 to (size-1) do begin
-        if compareText(myStudent[i].name, studName)=0 then
+        if upperCase(myStudent[i].name)=upperCase(studName) then
             findScore:=myStudent[i].score;
     end;
 end;
@@ -103,7 +103,7 @@ var
 begin
     for i := 0 to (size-2) do begin
         for j := 0 to (size-2-i) do begin
-            if compareText(myStudent[j].name, myStudent[j+1].name)>0 then begin
+            if upperCase(myStudent[j].name)>upperCase(myStudent[j+1].name) then begin
                 temp:= myStudent[j];
                 myStudent[j]:= myStudent[j+1];
                 myStudent[j+1]:= temp;
@@ -128,6 +128,14 @@ begin
     end;        
 end;
 
+function isEmpty():boolean;
+begin
+    if size=0 then
+        isEmpty:=true
+    else
+        isEmpty:=false;
+end;
+
 var
     choice: byte;
     addN: word;
@@ -148,37 +156,42 @@ begin
         write('Pilihan Anda (1-9): '); readln(choice);
         writeln;
 
-        case choice of
-            1:  begin
-                    clrscr;
-                    writeln('INPUT DATA');
-                    write('Banyak data yang ingin diinput: '); readln(addN);
-                    inputData(addN);
-                end;
-            2:  begin
-                    clrscr;
-                    writeln('MENAMPILKAN DATA');
-                    showData();
-                end;
-            3: writeln('=> Nilai Minimum: ', minScore());
-            4: writeln('=> Nilai Maksimum: ', maxScore());
-            5: writeln('=> Rata-rata Nilai: ', avgScore():0:2);
-            6:  begin
-                    write('Masukkan nama mahasiswa: '); readln(name);
-                    if findScore(name)=-1 then
-                        writeln('Data Tidak Ditemukan!')
-                    else
-                        writeln('Data Ditemukan! Nilai Alpro ', upperCase(name),' = ', findScore(name));
-                end;
-            7:  begin
-                    sortName();
-                    writeln('Data Telah Diurutkan Berdasarkan Nama!');
-                end;
-            8:  begin
-                    sortScore();
-                    writeln('Data Telah Diurutkan Berdasarkan Nilai Alpro!');
-                end;
-            else continue;
+        if isEmpty() and (choice<9) and (choice<>1) then
+            writeln('Belum ada data!')
+        else begin
+            case choice of
+                1:  begin
+                        clrscr;
+                        writeln('INPUT DATA');
+                        write('Banyak data yang ingin diinput: '); readln(addN);
+                        inputData(addN);
+                    end;
+                2:  begin
+                        clrscr;
+                        writeln('MENAMPILKAN DATA');
+                        showData();
+                    end;
+                3: writeln('=> Nilai Minimum: ', minScore());
+                4: writeln('=> Nilai Maksimum: ', maxScore());
+                5: writeln('=> Rata-rata Nilai: ', avgScore():0:2);
+                6:  begin
+                        write('Masukkan nama mahasiswa: '); readln(name);
+                        if findScore(name)=-1 then
+                            writeln('Data Tidak Ditemukan!')
+                        else
+                            writeln('Data Ditemukan! Nilai Alpro ', upperCase(name),' = ', findScore(name));
+                    end;
+                7:  begin
+                        sortName();
+                        writeln('Data Telah Diurutkan Berdasarkan Nama!');
+                    end;
+                8:  begin
+                        sortScore();
+                        writeln('Data Telah Diurutkan Berdasarkan Nilai Alpro!');
+                    end;
+                9: exit;
+                else continue;
+            end;
         end;
         writeln;
         write('enter to continue...'); readln;
